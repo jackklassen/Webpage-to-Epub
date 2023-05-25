@@ -11,12 +11,6 @@ def m_body(url): #maybe inseted of get the data and return it just send this inf
     
     return body
 
-def m_loopauthor(url):
-    page = requests.get(url)
-    soup = BeautifulSoup(page.content, "html.parser")
-    #find author page and split up their work
-    #put the urls into a list and call m_body with a recursive funciton idk
-    
 
 def m_gettitle(urL):
     page = requests.get(urL)
