@@ -1,5 +1,5 @@
 from ebooklib import epub
-from ..sites import switch as switch
+import switch as switch
 
 
 #https://stackoverflow.com/questions/64383172/how-to-create-a-link-which-points-to-the-a-potion-of-a-chapter-by-using-ebooklib to handle append to toc
@@ -9,22 +9,29 @@ def makebook(url):
     book = epub.EpubBook()
     # set metadata
     book.set_identifier("id123456")
-    book.set_title(switch.gettitle)
+    book.set_title(switch.gettitle(url))
     book.set_language("en")
     book.add_author(switch.getauthor(url))
     chapter_list = switch.getchapterlist(url)
     index = 0
+    
+    toc = list()
+    book.spine = ["nav"]
+    
     for chapter in chapter_list:
-        c1 = epub.EpubHtml(title=switch.gettitle(chapter), file_name=f"chap_{index}.xhtml", lang="en")
+        title = switch.gettitle(chapter)
+        filename = f"chap_{index}.xhtml"
+        c1 = epub.EpubHtml(title=title, file_name=filename, lang="en")
         c1.content = (str(switch.getbody(chapter)))
         book.add_item(c1)
+        link = epub.Link(filename,title,index)
+        toc.append(link)
+        book.spine.append(c1)
+        
         index = index + 1
 
     # define Table Of Contents
-    book.toc = (
-        epub.Link("chap_01.xhtml", "Introduction", "intro"),
-        (epub.Section("Simple book"), (c1,)),
-    )
+    book.toc = (tuple(toc))
 
     # add default NCX and Nav file
     book.add_item(epub.EpubNcx())
@@ -42,11 +49,17 @@ def makebook(url):
     # add CSS file
     book.add_item(nav_css)
 
-    # basic spine
-    book.spine = ["nav", c1]
+    
 
     # write to the file
-    epub.write_epub("test.epub", book, {})
+    output_file_name_raw = (switch.gettitle(url) + '.epub')
+   
+    print(output_file_name_raw)
+    
+    epub.write_epub(output_file_name_raw, book, {})
 
+
+
+makebook('https://www.marxists.org/archive/bookchin/')
 
 

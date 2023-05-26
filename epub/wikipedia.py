@@ -12,7 +12,7 @@ def w_body(url): #maybe inseted of get the data and return it just send this inf
     return body
 
 def w_gettitle(url):
-    page = requests.get(urL)
+    page = requests.get(url)
     soup = BeautifulSoup(page.content, "html.parser")
 
     title = soup.find('title')
