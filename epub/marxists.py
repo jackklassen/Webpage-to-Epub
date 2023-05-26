@@ -20,6 +20,9 @@ def m_gettitle(urL):
     title_text = title.get_text()
     return title_text
 
+def m_getchaptertitle(urL):
+    return m_gettitle(urL)
+
 def m_getauthorname(url):
     split_url = url.split('/')
     

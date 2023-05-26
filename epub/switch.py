@@ -24,6 +24,16 @@ def gettitle(url): #extend for all websites we account for
     if site == 'archiveofourown.org':
         return a_gettitle(url)
     
+def getchaptertitle(url): #extend for all websites we account for
+    url_split = url.split('/')
+    site = url_split[2]
+    if site == 'www.marxists.org':
+        return m_getchaptertitle(url)
+    if site == 'en.wikipedia.org':
+        return w_getchaptertitle(url)
+    if site == 'archiveofourown.org':
+        return a_getchaptertitle(url)    
+    
     
 def getbody(url):
     url_split = url.split('/')
@@ -43,5 +53,5 @@ def getauthor(url):
     if site == 'en.wikipedia.org':
         return w_getauthorname(url)
     if site == 'archiveofourown.org':
-        return a_getauthorname
+        return a_getauthorname(url)
 

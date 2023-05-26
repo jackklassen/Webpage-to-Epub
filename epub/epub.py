@@ -19,10 +19,14 @@ def makebook(url):
     book.spine = ["nav"]
     
     for chapter in chapter_list:
-        title = switch.gettitle(chapter)
+        title = switch.getchaptertitle(chapter)
         filename = f"chap_{index}.xhtml"
+        
+        print(f"title: {title} filename: {filename}")
+        
         c1 = epub.EpubHtml(title=title, file_name=filename, lang="en")
-        c1.content = (str(switch.getbody(chapter)))
+        c1.content = ('<html><body><p>' + str(switch.getbody(chapter)) + '</p></body></html>')
+        
         book.add_item(c1)
         link = epub.Link(filename,title,index)
         toc.append(link)
@@ -30,7 +34,7 @@ def makebook(url):
         
         index = index + 1
 
-    # define Table Of Contents
+    
     book.toc = (tuple(toc))
 
     # add default NCX and Nav file
@@ -60,6 +64,6 @@ def makebook(url):
 
 
 
-makebook('https://www.marxists.org/archive/bookchin/')
+makebook('https://archiveofourown.org/works/47399200/chapters/119439253')
 
 

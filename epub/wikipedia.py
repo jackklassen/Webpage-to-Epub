@@ -7,8 +7,7 @@ def w_body(url): #maybe inseted of get the data and return it just send this inf
     page = requests.get(url)
     soup = BeautifulSoup(page.content, "html.parser")
 
-    body = soup.find('body')
-    
+    body = soup.find('div',{'id':'bodyContent'})
     return body
 
 def w_gettitle(url):
@@ -18,6 +17,9 @@ def w_gettitle(url):
     title = soup.find('title')
     title_text = title.get_text()
     return title_text
+
+def w_getchaptertitle(url):
+    return w_gettitle(url)
 
 def w_getauthorname(url):
     return 'wikipedia'
