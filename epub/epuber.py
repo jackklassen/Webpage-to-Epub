@@ -35,7 +35,7 @@ def makebook(url):
         index = index + 1
 
     
-    book.toc = (tuple(toc))
+    #book.toc = (tuple(toc))
 
     # add default NCX and Nav file
     book.add_item(epub.EpubNcx())
@@ -64,6 +64,5 @@ def makebook(url):
 
 
 
-makebook('https://archiveofourown.org/works/47399200/chapters/119439253')
 
 
