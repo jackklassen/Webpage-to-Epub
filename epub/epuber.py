@@ -29,13 +29,13 @@ def makebook(url):
         
         book.add_item(c1)
         link = epub.Link(filename,title,index)
-        toc.append(link)
+        #toc.append(link)
         book.spine.append(c1)
         
         index = index + 1
 
-    
-    #book.toc = (tuple(toc))
+    #toc = tuple(toc)
+    #book.toc = toc #as of right now this only causes errors
 
     # add default NCX and Nav file
     book.add_item(epub.EpubNcx())
