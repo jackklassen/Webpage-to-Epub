@@ -7,6 +7,6 @@ Does not grab images from the website.
 
 Command line use is simple: python WebToEpub.py -d website-url-here
 
-all files including resulting epub files are in the epub folder.
+All files including resulting epub files are in the epub folder.
 
  \\\
