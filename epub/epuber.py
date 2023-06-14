@@ -5,7 +5,7 @@ import switch as switch
 #https://stackoverflow.com/questions/64383172/how-to-create-a-link-which-points-to-the-a-potion-of-a-chapter-by-using-ebooklib to handle append to toc
 #do an ifinite loop to add chapter and toc location with an exit condition given by the site file
 
-def makebook(url):
+def makebook(url,location):
     book = epub.EpubBook()
     # set metadata
     book.set_identifier("id123456")
@@ -53,14 +53,15 @@ def makebook(url):
     # add CSS file
     book.add_item(nav_css)
 
+    if(location == ''):
+         # write to the file
+        output_file_name_raw = (switch.gettitle(url) + '.epub')
+        epub.write_epub(output_file_name_raw, book, {})
     
-
-    # write to the file
-    output_file_name_raw = (switch.gettitle(url) + '.epub')
-   
-    print(output_file_name_raw)
-    
-    epub.write_epub(output_file_name_raw, book, {})
+    else:
+        # write to the file
+        output_file_name_raw = (location + "/" + switch.gettitle(url) + '.epub')
+        epub.write_epub(output_file_name_raw, book, {})
 
 
 
